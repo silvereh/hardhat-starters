@@ -9,7 +9,7 @@ const { ethers } = require( 'hardhat' )
 // For activating or de-activating test cases
 const TEST = {
 	ContractName : true,
-	USE_CASE : {
+	USE_CASES : {
 		READING     : true,
 		WRITING     : true,
 		WRONG_INPUT : true,
@@ -111,8 +111,28 @@ describe( 'ContractName', () => {
 			await contract.deployed()
 		})
 
-		it( 'first test', async () => {
-			expect( 1 ).to.equal( 1 )
+		describe( 'Reading ...', () => {
+			if ( TEST.USE_CASES.READING ) {
+			}
+		})
+
+		describe( 'Writing ...', () => {
+			if ( TEST.USE_CASES.WRITING ) {
+			}
+		})
+
+		describe( 'Wrong input ...', () => {
+			if ( TEST.USE_CASES.WRONG_INPUT ) {
+				describe( 'Reading ...', () => {
+					if ( TEST.USE_CASES.READING ) {
+					}
+				})
+
+				describe( 'Writing ...', () => {
+					if ( TEST.USE_CASES.WRITING ) {
+					}
+				})
+			}
 		})
 	}
 })
