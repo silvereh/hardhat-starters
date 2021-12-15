@@ -14,13 +14,19 @@ const TEST = {
 		WRITING     : true,
 		WRONG_INPUT : true,
 	},
-	METHODS  : {
+	EVENTS : {
+	},
+	METHODS : {
 	},
 }
 
-// For contract parameters
-const CONTRACT_PARAMS = {
+// For contract data
+const CONTRACT = {
+	EVENTS : {
+	},
 	METHODS : {
+	},
+	PARAMS : {
 	},
 }
 
@@ -30,27 +36,40 @@ const ERROR = {
 
 // For expected thrown errors
 const THROW = {
-}
-
-// For expected events
-const EVENTS = {
-}
-
-// For interface matching
-const INTERFACE_ID = {
-	NULL              : '0x00000000',
-	IERC165           : '0x01ffc9a7',
-	IERC2981          : '0x2a55205a',
-	IERC721           : '0x80ac58cd',
-	IERC721Metadata   : '0x5b5e139f',
-	IERC721Enumerable : '0x780e9d63',
-	INVALID           : '0xffffffff',
+	MISSING_ARGUMENT         : /missing argument/,
+	UNEXPECTED_ARGUMENT      : /too many arguments/,
+	INCORRECT_DATA_LENGTH    : /incorrect data length/,
+	INVALID_ADDRESS          : /invalid address/,
+	INVALID_ADDRESS_OR_ENS   : /invalid address or ENS name/,
+	INVALID_ADDRESS_STR      : /resolver or addr is not configured for ENS name/,
+	INVALID_BIG_NUMBER_STR   : /invalid BigNumber string/,
+	INVALID_BIG_NUMBER_VALUE : /invalid BigNumber value/,
+	INVALID_ARRAYIFY_VALUE   : /invalid arrayify value/,
+	OVERFLOW                 : /overflow/,
+	UNDERFLOW                : /underflow/,
+	OUT_OF_GAS               : /out of gas/,
+	STRING_ARRAY             : /str.charCodeAt is not a function/,
 }
 
 // For common constants
 const CST = {
-	BLACK_HOLE     : '0x0000000000000000000000000000000000000000',
-	ONE_ETH        : ethers.constants.WeiPerEther,
+	ETH          : ethers.constants.EtherSymbol,
+	ONE_ETH      : ethers.constants.WeiPerEther,
+	ADDRESS_ZERO : ethers.constants.AddressZero,
+	HASH_ZERO    : ethers.constants.HashZero,
+	NUMBER_ZERO  : ethers.constants.Zero,
+	NUMBER_ONE   : ethers.constants.One,
+	NUMBER_TWO   : ethers.constants.Two,
+	MAX_UINT256  : ethers.constants.MaxUint256,
+	INTERFACE_ID : {
+		IERC165           : '0x01ffc9a7',
+		IERC2981          : '0x2a55205a',
+		IERC721           : '0x80ac58cd',
+		IERC721Metadata   : '0x5b5e139f',
+		IERC721Enumerable : '0x780e9d63',
+		INVALID           : '0xffffffff',
+		NULL              : '0x00000000',
+	},
 }
 
 describe( 'ContractName', () => {
@@ -67,7 +86,7 @@ describe( 'ContractName', () => {
 		let user3_address
 
 		let contract
-		let CONTRACT
+		let CONTRACT_ARTIFACT
 
 		before( async () => {
 			[
@@ -82,11 +101,11 @@ describe( 'ContractName', () => {
 			user2_address = user2.address
 			user3_address = user3.address
 
-			CONTRACT = await ethers.getContractFactory( 'ContractName' )
+			CONTRACT_ARTIFACT = await ethers.getContractFactory( 'ContractName' )
 		})
 
 		beforeEach( async () => {
-			contract = await CONTRACT.deploy(
+			contract = await CONTRACT_ARTIFACT.deploy(
 				// contract constructor parameters
 			)
 			await contract.deployed()
