@@ -74,41 +74,65 @@ const CST = {
 
 describe( 'ContractName', () => {
 	if ( TEST.ContractName ) {
-		let addrs
-		let deployer
-		let user1
-		let user2
-		let user3
+		let contract_deployer_name = 'ContractDeployer'
+		let token_owner_name = 'TokenOwner'
+		let proxy_user_name = 'ProxyUser'
+		let wl_user1_name = 'WlUser1'
+		let wl_user2_name = 'WlUser2'
+		let user1_name = 'User1'
+		let user2_name = 'User2'
 
-		let deployer_address
+		let contract_deployer_address
+		let token_owner_address
+		let proxy_user_address
+		let wl_user1_address
+		let wl_user2_address
 		let user1_address
 		let user2_address
-		let user3_address
+
+		let contract_deployer
+		let token_owner
+		let proxy_user
+		let wl_user1
+		let wl_user2
+		let user1
+		let user2
+
+		let addrs
 
 		let contract
-		let CONTRACT_ARTIFACT
+		let contract_address
+		let contract_artifact
 
 		before( async () => {
 			[
-				deployer,
+				contract_deployer,
+				token_owner,
+				proxy_user,
+				wl_user1,
+				wl_user2,
 				user1,
 				user2,
-				user3,
 				...addrs
 			] = await ethers.getSigners()
-			deployer_address = deployer.address
+
+			contract_deployer_address = contract_deployer.address
+			token_owner_address = token_owner.address
+			proxy_user_address = proxy_user.address
+			wl_user1_address = wl_user1.address
+			wl_user2_address = wl_user2.address
 			user1_address = user1.address
 			user2_address = user2.address
-			user3_address = user3.address
 
-			CONTRACT_ARTIFACT = await ethers.getContractFactory( 'ContractName' )
+			contract_artifact = await ethers.getContractFactory( 'ContractName' )
 		})
 
 		beforeEach( async () => {
-			contract = await CONTRACT_ARTIFACT.deploy(
+			contract = await contract_artifact.deploy(
 				// contract constructor parameters
 			)
 			await contract.deployed()
+			contract_address = contract.address
 		})
 
 		describe( 'Reading ...', () => {
