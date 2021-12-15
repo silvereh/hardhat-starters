@@ -8,7 +8,8 @@ const { ethers } = require( 'hardhat' )
 
 // For activating or de-activating test cases
 const TEST = {
-	ContractName : true,
+	NAME : 'ContractName',
+	CONTRACT : true,
 	USE_CASES : {
 		READING     : true,
 		WRITING     : true,
@@ -22,6 +23,7 @@ const TEST = {
 
 // For contract data
 const CONTRACT = {
+	NAME : 'ContractName',
 	EVENTS : {
 	},
 	METHODS : {
@@ -72,8 +74,8 @@ const CST = {
 	},
 }
 
-describe( 'ContractName', () => {
-	if ( TEST.ContractName ) {
+describe( TEST.NAME, () => {
+	if ( TEST.CONTRACT ) {
 		let contract_deployer_name = 'ContractDeployer'
 		let token_owner_name = 'TokenOwner'
 		let proxy_user_name = 'ProxyUser'
@@ -124,7 +126,7 @@ describe( 'ContractName', () => {
 			user1_address = user1.address
 			user2_address = user2.address
 
-			contract_artifact = await ethers.getContractFactory( 'ContractName' )
+			contract_artifact = await ethers.getContractFactory( CONTRACT.NAME )
 		})
 
 		beforeEach( async () => {
